@@ -1,5 +1,3 @@
-package mission.mission1;
-
 public class Pawn {
     private final String color;
 

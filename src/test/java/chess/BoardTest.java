@@ -1,12 +1,10 @@
 package chess;
 
-import chess.pieces.Pieces;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import chess.pieces.Pawn;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.assertj.core.api.Assertions.*;
 
 public class BoardTest {
@@ -22,15 +20,15 @@ public class BoardTest {
     @Test
     @DisplayName("보드에 폰을 정상적으로 추가할 수 있어야 한다")
     public void create() throws Exception {
-        verifyPawn(Pieces.WHITE_COLOR);
-        verifyPawn(Pieces.BLACK_COLOR);
+        verifyPawn(Pawn.WHITE_COLOR, Pawn.WHITE_REPRESENTATION);
+        verifyPawn(Pawn.BLACK_COLOR, Pawn.BLACK_REPRESENTATION);
     }
 
-    private void verifyPawn(final String color) {
-        Pawn pawn = new Pawn(color);
+    private void verifyPawn(final String color, final String representation) {
+        Pawn pawn = new Pawn(color, representation);
         board.add(pawn); sequence++;
-        assertEquals(sequence, board.size());
-        assertEquals(pawn, board.findPawn(sequence - 1));
+        assertThat(sequence).isEqualTo(board.size());
+        assertThat(pawn).isEqualTo(board.findPawn(sequence - 1));
     }
 
     @Test

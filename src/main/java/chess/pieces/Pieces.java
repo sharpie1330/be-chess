@@ -1,11 +1,8 @@
 package chess.pieces;
 
 public enum Pieces {
-    WHITE_PAWN(Pieces.WHITE_COLOR, "♙"),
-    BLACK_PAWN(Pieces.BLACK_COLOR, "♟");
-
-    public static final String WHITE_COLOR = "white";
-    public static final String BLACK_COLOR = "black";
+    WHITE_PAWN(Pawn.WHITE_COLOR, "♙"),
+    BLACK_PAWN(Pawn.BLACK_COLOR, "♟");
 
     private final String color;
     private final String icon;

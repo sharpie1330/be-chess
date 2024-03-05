@@ -1,5 +1,6 @@
 package chess;
 
+import chess.pieces.Pieces;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -20,8 +21,8 @@ public class BoardTest {
     @Test
     @DisplayName("보드에 폰을 정상적으로 추가할 수 있어야 한다")
     public void create() throws Exception {
-        verifyPawn(Pawn.WHITE_COLOR);
-        verifyPawn(Pawn.BLACK_COLOR);
+        verifyPawn(Pieces.WHITE_COLOR);
+        verifyPawn(Pieces.BLACK_COLOR);
     }
 
     private void verifyPawn(final String color) {

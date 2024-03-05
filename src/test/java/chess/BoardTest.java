@@ -35,7 +35,7 @@ public class BoardTest {
     @DisplayName("흰색 폰과 검정색 폰이 정상적으로 초기화되어야 한다.")
     public void initialize() throws Exception {
         board.initialize();
-        assertThat("♙".repeat(Board.LENGTH)).isEqualTo(board.getWhitePawnsResult());
-        assertThat("♟".repeat(Board.LENGTH)).isEqualTo(board.getBlackPawnsResult());
+        assertThat(Pawn.WHITE_REPRESENTATION.repeat(Board.LENGTH)).isEqualTo(board.getWhitePawnsResult());
+        assertThat(Pawn.BLACK_REPRESENTATION.repeat(Board.LENGTH)).isEqualTo(board.getBlackPawnsResult());
     }
 }

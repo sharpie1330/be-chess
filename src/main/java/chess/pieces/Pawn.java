@@ -3,8 +3,8 @@ package chess.pieces;
 public class Pawn {
     public static final String WHITE_COLOR = "white";
     public static final String BLACK_COLOR = "black";
-    public static final String WHITE_REPRESENTATION = "♙";
-    public static final String BLACK_REPRESENTATION = "♟";
+    public static final String WHITE_REPRESENTATION = "♟";
+    public static final String BLACK_REPRESENTATION = "♙";
 
     private final String color;
     private final String representation;

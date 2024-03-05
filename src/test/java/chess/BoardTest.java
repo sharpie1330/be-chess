@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 import chess.pieces.Pawn;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.assertj.core.api.Assertions.*;
 
 public class BoardTest {
     private Board board;
@@ -30,5 +31,25 @@ public class BoardTest {
         board.add(pawn); sequence++;
         assertEquals(sequence, board.size());
         assertEquals(pawn, board.findPawn(sequence - 1));
+    }
+
+    @Test
+    @DisplayName("보드가 정상적으로 초기화되어야 한다.")
+    public void boardInitCheck() {
+        final String BOARD_INIT =
+        """
+        ▯▯▯▯▯▯▯▯
+        ♟♟♟♟♟♟♟♟
+        ▯▯▯▯▯▯▯▯
+        ▯▯▯▯▯▯▯▯
+        ▯▯▯▯▯▯▯▯
+        ▯▯▯▯▯▯▯▯
+        ♙♙♙♙♙♙♙♙
+        ▯▯▯▯▯▯▯▯""";
+
+        board.boardInit();
+        String boardString = board.boardPrint();
+
+        assertThat(boardString).isEqualTo(BOARD_INIT);
     }
 }

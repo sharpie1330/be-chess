@@ -11,11 +11,11 @@ public class PawnTest {
     @Test
     @DisplayName("흰색 폰과 검정색 폰이 생성되어야 한다")
     void create() {
-        final String white = "white";
-        final String black = "black";
+        final String WHITE = "white";
+        final String BLACK = "black";
 
-        verifyPawn(white);
-        verifyPawn(black);
+        verifyPawn(WHITE);
+        verifyPawn(BLACK);
     }
 
     private void verifyPawn(final String color) {

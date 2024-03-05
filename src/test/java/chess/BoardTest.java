@@ -32,22 +32,10 @@ public class BoardTest {
     }
 
     @Test
-    @DisplayName("보드가 정상적으로 초기화되어야 한다.")
-    public void boardInitCheck() {
-        final String BOARD_INIT =
-        """
-        ▯▯▯▯▯▯▯▯
-        ♟♟♟♟♟♟♟♟
-        ▯▯▯▯▯▯▯▯
-        ▯▯▯▯▯▯▯▯
-        ▯▯▯▯▯▯▯▯
-        ▯▯▯▯▯▯▯▯
-        ♙♙♙♙♙♙♙♙
-        ▯▯▯▯▯▯▯▯""";
-
-        board.boardInit();
-        String boardString = board.boardPrint();
-
-        assertThat(boardString).isEqualTo(BOARD_INIT);
+    @DisplayName("흰색 폰과 검정색 폰이 정상적으로 초기화되어야 한다.")
+    public void initialize() throws Exception {
+        board.initialize();
+        assertThat("♙".repeat(Board.LENGTH)).isEqualTo(board.getWhitePawnsResult());
+        assertThat("♟".repeat(Board.LENGTH)).isEqualTo(board.getBlackPawnsResult());
     }
 }

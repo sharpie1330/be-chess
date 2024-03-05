@@ -7,36 +7,36 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Board {
-    private static final String BLANK_SPACE = "▯";
-    private static final int LENGTH = 8;
-    private final String[][] board;
-    private final List<Pawn> pawns;
+    public static final String BLANK_SPACE = "▯";
+    public static final int LENGTH = 8;
+
+    private final List<List<Pawn>> board;
+    private List<Pawn> pawns;
 
     public Board() {
-        board = new String[LENGTH][LENGTH];
-        pawns = new ArrayList<>();
+        board = new ArrayList<>();
     }
 
-    public void boardInit() {
+    public void initialize() {
         for (int i = 0; i < LENGTH; i++) {
+            pawns = new ArrayList<>();
             for (int j = 0; j < LENGTH; j++) {
                 if (i == 1) {
-                    board[i][j] = Pieces.BLACK_PAWN.getIcon();
+                    add(new Pawn());
                 } else if (i == 6) {
-                    board[i][j] = Pieces.WHITE_PAWN.getIcon();
-                } else {
-                    board[i][j] = BLANK_SPACE;
+                    add(new Pawn(Pawn.BLACK_COLOR, Pawn.BLACK_REPRESENTATION));
                 }
             }
+            board.add(pawns);
         }
     }
 
-    public String boardPrint() {
+    public String print() {
         StringBuilder boardString = new StringBuilder();
 
         for (int i = 0; i < LENGTH; i++) {
             for (int j = 0; j < LENGTH; j++) {
-                boardString.append(board[i][j]);
+                boardString.append(board.get(i).get(j));
             }
             boardString.append("\n");
         }
@@ -56,5 +56,25 @@ public class Board {
 
     public Pawn findPawn(int index) {
         return pawns.get(index);
+    }
+
+    public String getWhitePawnsResult() {
+        StringBuilder whitePawnResult = new StringBuilder();
+
+        for (int i = 0; i < LENGTH; i++) {
+            whitePawnResult.append(board.get(1).get(i).getRepresentation());
+        }
+
+        return whitePawnResult.toString();
+    }
+
+    public String getBlackPawnsResult() {
+        StringBuilder blackPawnResult = new StringBuilder();
+
+        for (int i = 0; i < LENGTH; i++) {
+            blackPawnResult.append(board.get(6).get(i).getRepresentation());
+        }
+
+        return blackPawnResult.toString();
     }
 }

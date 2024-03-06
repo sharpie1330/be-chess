@@ -29,7 +29,5 @@ public class Main {
 
     private static void gameStart() {
         Board board = new Board();
-        board.initialize();
-        board.print();
     }
 }

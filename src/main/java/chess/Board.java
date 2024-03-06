@@ -1,9 +1,12 @@
 package chess;
 
 import chess.pieces.Pawn;
+import utils.StringUtils;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static utils.StringUtils.*;
 
 public class Board {
     public static final String BLANK_SPACE = "▯";
@@ -36,17 +39,18 @@ public class Board {
         StringBuilder boardString = new StringBuilder();
 
         for (int i = 0; i < LENGTH; i++) {
+            String line = "";
             if (i == 1) {
-                boardString.append(getBlackPawnsResult());
+                line = getBlackPawnsResult();
             } else if (i == 6) {
-                boardString.append(getWhitePawnsResult());
+                line = getWhitePawnsResult();
             } else {
-                boardString.append(BLANK_SPACE.repeat(LENGTH));
+                line = BLANK_SPACE.repeat(LENGTH);
             }
-            boardString.append("\n");
+            boardString.append(appendNewLine(line));
         }
 
-        boardString.replace(boardString.length() - 1, boardString.length(), "");
+        boardString.deleteCharAt(boardString.length() - 1);
 
         System.out.println(boardString);
     }

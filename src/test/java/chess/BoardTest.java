@@ -3,17 +3,30 @@ package chess;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import chess.pieces.Piece;
 
 import static org.assertj.core.api.Assertions.*;
+import static utils.StringUtils.appendNewLine;
 
 public class BoardTest {
     private Board board;
-    private int sequence;
 
     @BeforeEach
-    void boardInit() {
+    void setUp() {
         board = new Board();
-        sequence = 0;
+    }
+
+    @Test
+    @DisplayName("보드에 기물들이 적절히 배치되어야 한다.")
+    public void create() throws Exception {
+        board.initialize();
+        assertThat(32).isEqualTo(board.pieceCount());
+        String blankRank = appendNewLine(Board.BLANK_SPACE.repeat(Board.LENGTH));
+        assertThat(
+                appendNewLine("♜♞♝♛♚♝♞♜") +
+                        appendNewLine("♟♟♟♟♟♟♟♟") +
+                        blankRank + blankRank + blankRank + blankRank +
+                        appendNewLine("♙♙♙♙♙♙♙♙") +
+                        appendNewLine("♖♘♗♕♔♗♘♖"))
+                .isEqualTo(board.showBoard());
     }
 }

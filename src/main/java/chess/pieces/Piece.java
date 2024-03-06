@@ -1,5 +1,7 @@
 package chess.pieces;
 
+import chess.Board;
+
 import java.util.Objects;
 
 import static chess.pieces.Representation.*;
@@ -62,6 +64,10 @@ public class Piece {
 
     public static Piece createBlackKing() {
         return new Piece(BLACK_COLOR, king.getRepresentation_black());
+    }
+
+    public static Piece createBlankSquare() {
+        return new Piece("", Board.BLANK_SPACE);
     }
 
     public String getColor() {

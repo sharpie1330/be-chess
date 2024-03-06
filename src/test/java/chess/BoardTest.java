@@ -20,15 +20,21 @@ public class BoardTest {
     @Test
     @DisplayName("보드에 폰을 정상적으로 추가할 수 있어야 한다")
     public void create() throws Exception {
-        verifyPawn(Pawn.WHITE_COLOR, Pawn.WHITE_REPRESENTATION);
-        verifyPawn(Pawn.BLACK_COLOR, Pawn.BLACK_REPRESENTATION);
+        verifyPawnAdded(Pawn.WHITE_COLOR, Pawn.WHITE_REPRESENTATION);
+        verifyPawnAdded(Pawn.BLACK_COLOR, Pawn.BLACK_REPRESENTATION);
     }
 
-    private void verifyPawn(final String color, final String representation) {
-        Pawn pawn = new Pawn(color, representation);
-        board.add(pawn); sequence++;
+    private void verifyPawnAdded(final String color, final String representation) {
+        Pawn pawn = createAndAddPawnToBoard(color, representation);
         assertThat(sequence).isEqualTo(board.size());
         assertThat(pawn).isEqualTo(board.findPawn(sequence - 1));
+    }
+
+    private Pawn createAndAddPawnToBoard(final String color, final String representation) {
+        Pawn pawn = new Pawn(color, representation);
+        board.add(pawn);
+        sequence++;
+        return pawn;
     }
 
     @Test

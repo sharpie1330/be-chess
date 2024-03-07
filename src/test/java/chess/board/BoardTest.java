@@ -1,4 +1,4 @@
-package chess;
+package chess.board;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -20,7 +20,7 @@ public class BoardTest {
     public void create() throws Exception {
         board.initialize();
         assertThat(32).isEqualTo(board.pieceCount());
-        String blankRank = appendNewLine(Board.BLANK_SPACE.repeat(Board.LENGTH));
+        String blankRank = appendNewLine(Rank.BLANK_SQUARE.repeat(Rank.LENGTH));
         assertThat(
                 appendNewLine("♜♞♝♛♚♝♞♜") +
                         appendNewLine("♟♟♟♟♟♟♟♟") +

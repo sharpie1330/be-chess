@@ -30,6 +30,14 @@ public class Piece {
         return representation;
     }
 
+    public boolean isBlack() {
+        return getColor().equals(BLACK_COLOR);
+    }
+
+    public boolean isWhite() {
+        return getColor().equals(WHITE_COLOR);
+    }
+
     @Override
     public int hashCode() {
         return Objects.hash(color, representation);

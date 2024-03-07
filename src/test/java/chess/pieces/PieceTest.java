@@ -20,4 +20,16 @@ public class PieceTest {
         assertThat(piece.getColor()).isEqualTo(color);
         assertThat(representation).isEqualTo(piece.getRepresentation());
     }
+
+    @Test
+    @DisplayName("체스 기물의 색이 검정색인지 흰색인지 검증할 수 있어야 한다")
+    void checkPieceColor() {
+        for (Representation representation : Representation.values()) {
+            Piece whitePiece = Piece.createWhitePiece(representation.name());
+            Piece blackPiece = Piece.createBlackPiece(representation.name());
+
+            assertThat(whitePiece.isWhite()).isTrue();
+            assertThat(blackPiece.isBlack()).isTrue();
+        }
+    }
 }

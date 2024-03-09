@@ -36,7 +36,7 @@ public class Board {
     private void addBoardBlackPawns() {
         Rank rank = new Rank();
         for (int i = 0; i < LENGTH; i++) {
-            rank.add(Piece.createBlackPiece("pawn"));   // TODO: enum으로 관리
+            rank.add(Piece.createBlackPiece("pawn"));
         }
         board.add(rank);
     }
@@ -50,7 +50,7 @@ public class Board {
     private void addBoardWhitePawns() {
         Rank rank = new Rank();
         for (int i = 0; i < LENGTH; i++) {
-            rank.add(Piece.createWhitePiece("pawn"));   // TODO: enum으로 관리
+            rank.add(Piece.createWhitePiece("pawn"));
         }
         board.add(rank);
     }

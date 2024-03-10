@@ -8,6 +8,10 @@ public class Square {
     public Square() {
     }
 
+    public boolean isEqualPiece(Piece piece) {
+        return piece != null && piece.equals(this.piece);
+    }
+
     public Square(Piece piece) {
         this.piece = piece;
     }

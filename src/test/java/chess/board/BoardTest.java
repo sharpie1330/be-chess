@@ -1,5 +1,7 @@
 package chess.board;
 
+import chess.pieces.Piece;
+import chess.pieces.PieceType;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -28,5 +30,14 @@ public class BoardTest {
                         appendNewLine("♙♙♙♙♙♙♙♙") +
                         appendNewLine("♖♘♗♕♔♗♘♖"))
                 .isEqualTo(board.showBoard());
+    }
+
+    @Test
+    @DisplayName("보드에 있는 기물의 개수를 셀 수 있어야 한다.")
+    public void countPiece() throws Exception {
+        board.initialize();
+
+        Piece blackPawn = Piece.createBlackPiece(PieceType.pawn.name());
+        assertThat(8).isEqualTo(board.countPiece(blackPawn));
     }
 }

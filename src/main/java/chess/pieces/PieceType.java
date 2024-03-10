@@ -2,7 +2,7 @@ package chess.pieces;
 
 import java.util.Arrays;
 
-public enum Representation {
+public enum PieceType {
     pawn("♙", "♟"),
     knight("♘", "♞"),
     rook("♖", "♜"),
@@ -13,7 +13,7 @@ public enum Representation {
     private final String representationWhite;
     private final String representationBlack;
 
-    Representation(String representationWhite, String representationBlack) {
+    PieceType(String representationWhite, String representationBlack) {
         this.representationWhite = representationWhite;
         this.representationBlack = representationBlack;
     }
@@ -27,15 +27,15 @@ public enum Representation {
     }
 
     public static String getRepresentation(final String name, final String color) {
-        Representation representation = Arrays.stream(Representation.values())
+        PieceType pieceType = Arrays.stream(PieceType.values())
                 .filter(rep -> rep.name().equals(name))
                 .findFirst()
                 .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 기물입니다."));
 
         if (color.equals(Piece.WHITE_COLOR)) {
-            return representation.representationWhite;
+            return pieceType.representationWhite;
         } else if (color.equals(Piece.BLACK_COLOR)) {
-            return representation.representationBlack;
+            return pieceType.representationBlack;
         }
         throw new IllegalArgumentException("존재하지 않는 색상입니다.");
     }

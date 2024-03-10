@@ -9,7 +9,8 @@ import static chess.board.Rank.LENGTH;
 import static utils.StringUtils.*;
 
 public class Board {
-    private static final String[] piecesOrder = {"rook", "knight", "bishop", "queen", "king", "bishop", "knight", "rook"};
+    private static final String[] piecesOrder =
+            {"rook", "knight", "bishop", "queen", "king", "bishop", "knight", "rook"};
 
     private final List<Rank> board;
 
@@ -85,5 +86,13 @@ public class Board {
             boardStatus.append(appendNewLine(rank.getRankStatus()));
         }
         return boardStatus.toString();
+    }
+
+    public int countPiece(Piece piece) {
+        int count = 0;
+        for (Rank rank : board) {
+            count += rank.countPiece(piece);
+        }
+        return count;
     }
 }

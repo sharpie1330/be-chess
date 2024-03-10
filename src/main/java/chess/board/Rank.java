@@ -38,6 +38,16 @@ public class Rank {
         return Optional.ofNullable(rank.get(index).getPiece());
     }
 
+    public int countPiece(Piece piece) {
+        int count = 0;
+        for (Square square : rank) {
+            if (square.isEqualPiece(piece)) {
+                count++;
+            }
+        }
+        return count;
+    }
+
     public String getRankStatus() {
         if (isEmpty()) {
             return BLANK_SQUARE.repeat(8);

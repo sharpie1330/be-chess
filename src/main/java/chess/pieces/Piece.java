@@ -15,11 +15,11 @@ public class Piece {
     }
 
     public static Piece createWhitePiece(String name) {
-        return new Piece(WHITE_COLOR, Representation.getRepresentation(name, WHITE_COLOR));
+        return new Piece(WHITE_COLOR, PieceType.getRepresentation(name, WHITE_COLOR));
     }
 
     public static Piece createBlackPiece(String name) {
-        return new Piece(BLACK_COLOR, Representation.getRepresentation(name, BLACK_COLOR));
+        return new Piece(BLACK_COLOR, PieceType.getRepresentation(name, BLACK_COLOR));
     }
 
     public String getColor() {

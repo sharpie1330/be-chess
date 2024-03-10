@@ -40,4 +40,16 @@ public class BoardTest {
         Piece blackPawn = Piece.createBlackPiece(PieceType.pawn.name());
         assertThat(8).isEqualTo(board.countPiece(blackPawn));
     }
+
+    @Test
+    @DisplayName("좌표로 보드의 기물을 조회할 수 있다")
+    public void findPiece() throws Exception {
+        board.initialize();
+
+        assertThat(Piece.createBlackPiece(PieceType.rook.name())).isEqualTo(board.findPiece("a8"));
+        assertThat(Piece.createBlackPiece(PieceType.rook.name())).isEqualTo(board.findPiece("h8"));
+        assertThat(Piece.createWhitePiece(PieceType.rook.name())).isEqualTo(board.findPiece("a1"));
+        assertThat(Piece.createWhitePiece(PieceType.rook.name())).isEqualTo(board.findPiece("h1"));
+        assertThat(Piece.createWhitePiece(PieceType.king.name())).isEqualTo(board.findPiece("e1"));
+    }
 }

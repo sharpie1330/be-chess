@@ -95,4 +95,12 @@ public class Board {
         }
         return count;
     }
+
+    // 올바른 입력이 들어왔다고 가정 TODO: 입력 검증(at Input 클래스)
+    public Piece findPiece(final String position) {
+        int index0 = position.charAt(0) - 'a';
+        int index1 = LENGTH - (position.charAt(1) - '1') - 1;
+
+        return board.get(index1).findPiece(index0).orElse(null);
+    }
 }

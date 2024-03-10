@@ -74,5 +74,16 @@ public class Rank {
                 })
                 .reduce("", (x, y) -> x + y);
     }
+
+    public List<Piece> findPiecesByColor(String color) {
+        List<Piece> pieces = new ArrayList<>();
+        for (Square square : rank) {
+            if (square.getPiece() == null) {
+                continue;
+            }
+            square.addIfColorMatch(color, pieces);
+        }
+        return pieces;
+    }
 }
 

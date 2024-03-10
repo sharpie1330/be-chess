@@ -2,6 +2,8 @@ package chess.board;
 
 import chess.pieces.Piece;
 
+import java.util.List;
+
 public class Square {
     private Piece piece;
 
@@ -22,5 +24,11 @@ public class Square {
 
     public void setPiece(Piece piece) {
         this.piece = piece;
+    }
+
+    public void addIfColorMatch(String color, List<Piece> findPieces) {
+        if (piece != null && piece.getColor().equals(color)) {
+            findPieces.add(piece);
+        }
     }
 }

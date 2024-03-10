@@ -1,16 +1,18 @@
 package chess.board;
 
 import chess.pieces.Piece;
+import chess.pieces.PieceType;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import static chess.board.Rank.LENGTH;
+import static chess.pieces.PieceType.*;
 import static utils.StringUtils.*;
 
 public class Board {
-    private static final String[] piecesOrder =
-            {"rook", "knight", "bishop", "queen", "king", "bishop", "knight", "rook"};
+    private static final PieceType[] piecesOrder =
+            {rook, knight, bishop, queen, king, bishop, knight, rook};
 
     private final List<Rank> board;
 
@@ -41,7 +43,7 @@ public class Board {
     private void addBoardBlackPawns() {
         Rank rank = new Rank();
         for (int i = 0; i < LENGTH; i++) {
-            rank.add(Piece.createBlackPiece("pawn"));
+            rank.add(Piece.createBlackPiece(PieceType.pawn));
         }
         board.add(rank);
     }
@@ -57,7 +59,7 @@ public class Board {
     private void addBoardWhitePawns() {
         Rank rank = new Rank();
         for (int i = 0; i < LENGTH; i++) {
-            rank.add(Piece.createWhitePiece("pawn"));
+            rank.add(Piece.createWhitePiece(PieceType.pawn));
         }
         board.add(rank);
     }
@@ -119,5 +121,21 @@ public class Board {
 
     private int[] verifyPosition(String position) {
         return new int[]{position.charAt(0) - 'a', LENGTH - (position.charAt(1) - '1') - 1};
+    }
+
+    public double calculatePoint(String color) {
+        double score = 0.0;
+        for (Piece piece : findPiecesByColor(color)) {
+            score += piece.getPieceType().getDefaultPoint();
+        }
+        return score;
+    }
+
+    public List<Piece> findPiecesByColor(String color) {
+        List<Piece> pieces = new ArrayList<>();
+        for (Rank rank : board) {
+            pieces.addAll(rank.findPiecesByColor(color));
+        }
+        return pieces;
     }
 }

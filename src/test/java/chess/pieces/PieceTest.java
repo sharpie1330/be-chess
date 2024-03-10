@@ -11,8 +11,8 @@ public class PieceTest {
     @DisplayName("각 체스 기물마다 흰색과 검정색 기물이 생성되어야 한다")
     void create_piece() {
         for (PieceType pieceType : PieceType.values()) {
-            verifyPiece(Piece.createWhitePiece(pieceType.name()), Piece.WHITE_COLOR, pieceType.getRepresentationWhite());
-            verifyPiece(Piece.createBlackPiece(pieceType.name()), Piece.BLACK_COLOR, pieceType.getRepresentationBlack());
+            verifyPiece(Piece.createWhitePiece(pieceType), Piece.WHITE_COLOR, pieceType.getRepresentationWhite());
+            verifyPiece(Piece.createBlackPiece(pieceType), Piece.BLACK_COLOR, pieceType.getRepresentationBlack());
         }
     }
 
@@ -25,8 +25,8 @@ public class PieceTest {
     @DisplayName("체스 기물의 색이 검정색인지 흰색인지 검증할 수 있어야 한다")
     void checkPieceColor() {
         for (PieceType pieceType : PieceType.values()) {
-            Piece whitePiece = Piece.createWhitePiece(pieceType.name());
-            Piece blackPiece = Piece.createBlackPiece(pieceType.name());
+            Piece whitePiece = Piece.createWhitePiece(pieceType);
+            Piece blackPiece = Piece.createBlackPiece(pieceType);
 
             assertThat(whitePiece.isWhite()).isTrue();
             assertThat(blackPiece.isBlack()).isTrue();

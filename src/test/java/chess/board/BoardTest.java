@@ -2,6 +2,7 @@ package chess.board;
 
 import chess.pieces.Piece;
 import chess.pieces.PieceType;
+import org.assertj.core.data.Percentage;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -37,7 +38,7 @@ public class BoardTest {
     public void countPiece() throws Exception {
         board.initialize();
 
-        Piece blackPawn = Piece.createBlackPiece(PieceType.pawn.name());
+        Piece blackPawn = Piece.createBlackPiece(PieceType.pawn);
         assertThat(8).isEqualTo(board.countPiece(blackPawn));
     }
 
@@ -46,11 +47,11 @@ public class BoardTest {
     public void findPiece() throws Exception {
         board.initialize();
 
-        assertThat(Piece.createBlackPiece(PieceType.rook.name())).isEqualTo(board.findPiece("a8"));
-        assertThat(Piece.createBlackPiece(PieceType.rook.name())).isEqualTo(board.findPiece("h8"));
-        assertThat(Piece.createWhitePiece(PieceType.rook.name())).isEqualTo(board.findPiece("a1"));
-        assertThat(Piece.createWhitePiece(PieceType.rook.name())).isEqualTo(board.findPiece("h1"));
-        assertThat(Piece.createWhitePiece(PieceType.king.name())).isEqualTo(board.findPiece("e1"));
+        assertThat(Piece.createBlackPiece(PieceType.rook)).isEqualTo(board.findPiece("a8"));
+        assertThat(Piece.createBlackPiece(PieceType.rook)).isEqualTo(board.findPiece("h8"));
+        assertThat(Piece.createWhitePiece(PieceType.rook)).isEqualTo(board.findPiece("a1"));
+        assertThat(Piece.createWhitePiece(PieceType.rook)).isEqualTo(board.findPiece("h1"));
+        assertThat(Piece.createWhitePiece(PieceType.king)).isEqualTo(board.findPiece("e1"));
     }
 
     @Test
@@ -59,10 +60,36 @@ public class BoardTest {
         board.initializeEmpty();
 
         final String position = "b5";
-        Piece piece = Piece.createBlackPiece(PieceType.rook.name());
+        Piece piece = Piece.createBlackPiece(PieceType.rook);
         board.move(position, piece);
 
         assertThat(piece).isEqualTo(board.findPiece(position));
         board.print();
+    }
+
+    @Test
+    @DisplayName("남아있는 기물에 따라 점수를 계산할 수 있어야 한다")
+    public void calculatePoint() throws Exception {
+        board.initializeEmpty();
+
+        addPiece("b6", Piece.createBlackPiece(PieceType.pawn));
+        addPiece("e6", Piece.createBlackPiece(PieceType.queen));
+        addPiece("b8", Piece.createBlackPiece(PieceType.king));
+        addPiece("c8", Piece.createBlackPiece(PieceType.rook));
+
+        addPiece("f2", Piece.createWhitePiece(PieceType.pawn));
+        addPiece("g2", Piece.createWhitePiece(PieceType.pawn));
+        addPiece("e1", Piece.createWhitePiece(PieceType.rook));
+        addPiece("f1", Piece.createWhitePiece(PieceType.king));
+
+        // 오차 범위 0.01
+        assertThat(15.0).isCloseTo(board.calculatePoint(Piece.BLACK_COLOR), Percentage.withPercentage(0.01));
+        assertThat(7.0).isCloseTo(board.calculatePoint(Piece.WHITE_COLOR), Percentage.withPercentage(0.01));
+
+        System.out.println(board.showBoard());
+    }
+
+    private void addPiece(String position, Piece piece) {
+        board.move(position, piece);
     }
 }

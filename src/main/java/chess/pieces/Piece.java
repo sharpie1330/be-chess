@@ -8,18 +8,20 @@ public class Piece {
 
     private final String color;
     private final String representation;
+    private final PieceType pieceType;
 
-    private Piece(String color, String representation) {
+    private Piece(String color, String representation, PieceType pieceType) {
         this.color = color;
         this.representation = representation;
+        this.pieceType = pieceType;
     }
 
-    public static Piece createWhitePiece(String name) {
-        return new Piece(WHITE_COLOR, PieceType.getRepresentation(name, WHITE_COLOR));
+    public static Piece createWhitePiece(PieceType pieceType) {
+        return new Piece(WHITE_COLOR, pieceType.getRepresentationWhite(), pieceType);
     }
 
-    public static Piece createBlackPiece(String name) {
-        return new Piece(BLACK_COLOR, PieceType.getRepresentation(name, BLACK_COLOR));
+    public static Piece createBlackPiece(PieceType pieceType) {
+        return new Piece(BLACK_COLOR, pieceType.getRepresentationBlack(), pieceType);
     }
 
     public String getColor() {
@@ -28,6 +30,10 @@ public class Piece {
 
     public String getRepresentation() {
         return representation;
+    }
+
+    public PieceType getPieceType() {
+        return pieceType;
     }
 
     public boolean isBlack() {

@@ -7,6 +7,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
+
 import static org.assertj.core.api.Assertions.*;
 import static utils.StringUtils.appendNewLine;
 
@@ -91,5 +93,33 @@ public class BoardTest {
 
     private void addPiece(String position, Piece piece) {
         board.move(position, piece);
+    }
+
+    @Test
+    @DisplayName("기물을 색깔별로 구분해서 점수가 높거나 낮은 순서로 정렬할 수 있어야 한다")
+    public void sortPieces() throws Exception {
+        board.initializeEmpty();
+
+        Piece blackQueen = Piece.createBlackPiece(PieceType.queen);
+        Piece blackKing = Piece.createBlackPiece(PieceType.king);
+        Piece blackRook = Piece.createBlackPiece(PieceType.rook);
+
+        addPiece("e6", blackQueen);
+        addPiece("b8", blackKing);
+        addPiece("c8", blackRook);
+
+        assertThat(List.of(blackQueen, blackRook, blackKing))
+                .containsExactlyElementsOf(board.sortPiecesByScoreAndColor(Piece.BLACK_COLOR, false));
+
+        Piece whitePawn = Piece.createWhitePiece(PieceType.pawn);
+        Piece whiteKing = Piece.createWhitePiece(PieceType.king);
+        Piece whiteRook = Piece.createWhitePiece(PieceType.rook);
+
+        addPiece("f2", whiteKing);
+        addPiece("f1", whitePawn);
+        addPiece("e1", whiteRook);
+
+        assertThat(List.of(whiteKing, whitePawn, whiteRook))
+                .containsExactlyElementsOf(board.sortPiecesByScoreAndColor(Piece.WHITE_COLOR, true));
     }
 }

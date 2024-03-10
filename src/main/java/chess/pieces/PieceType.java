@@ -32,12 +32,6 @@ public enum PieceType {
         return defaultPoint;
     }
 
-    public static double getDefaultPoint(final String name) {
-        PieceType pieceType = getPieceType(name);
-
-        return pieceType.getDefaultPoint();
-    }
-
     public static PieceType getPieceType(String name) {
         return Arrays.stream(PieceType.values())
                 .filter(p -> p.name().equals(name))

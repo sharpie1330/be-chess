@@ -4,6 +4,7 @@ import chess.pieces.Piece;
 import chess.pieces.PieceType;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 import static chess.board.Rank.LENGTH;
@@ -137,5 +138,19 @@ public class Board {
             pieces.addAll(rank.findPiecesByColor(color));
         }
         return pieces;
+    }
+
+    public List<Piece> sortPiecesByScoreAndColor(String color, boolean ascending) {
+        Comparator<Piece> comparator = Comparator.comparing(
+                p -> p.getPieceType().getDefaultPoint()
+        );
+
+        if (!ascending) {
+            comparator = comparator.reversed();
+        }
+
+        return findPiecesByColor(color).stream()
+                .sorted(comparator)
+                .toList();
     }
 }

@@ -37,7 +37,9 @@ public class Rank {
     }
 
     public void set(int index, Piece piece) {
-        rank.set(index, new Square(piece));
+        Square square = rank.get(index);
+        square.setPiece(piece);
+        rank.set(index, square);
     }
 
     public int size() {

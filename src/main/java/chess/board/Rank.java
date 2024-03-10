@@ -26,8 +26,18 @@ public class Rank {
         return isEmpty;
     }
 
+    public void initAsBlankRank() {
+        for (int i = 0; i < LENGTH; i++) {
+            rank.add(new Square());
+        }
+    }
+
     public void add(Piece piece) {
         rank.add(new Square(piece));
+    }
+
+    public void set(int index, Piece piece) {
+        rank.set(index, new Square(piece));
     }
 
     public int size() {
@@ -54,7 +64,12 @@ public class Rank {
         }
 
         return rank.stream()
-                .map(p -> p.getPiece().getRepresentation())
+                .map(p -> {
+                    if (p.getPiece() == null) {
+                        return BLANK_SQUARE;
+                    }
+                    return p.getPiece().getRepresentation();
+                })
                 .reduce("", (x, y) -> x + y);
     }
 }

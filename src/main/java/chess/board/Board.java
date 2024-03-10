@@ -20,8 +20,12 @@ public class Board {
 
     public void initialize() {
         addBoardBlackPieces();
-        addBoardBlankRank();
+        addBoardBlankRank(2, 6);
         addBoardWhitePieces();
+    }
+
+    public void initializeEmpty() {
+        addBoardBlankRank(0, LENGTH);
     }
 
     private void addBoardBlackPieces() {
@@ -42,9 +46,11 @@ public class Board {
         board.add(rank);
     }
 
-    private void addBoardBlankRank() {
-        for (int i = 2; i <= 5; i++) {
-            board.add(new Rank());
+    private void addBoardBlankRank(int start, int end) {
+        for (int i = start; i < end; i++) {
+            Rank rank = new Rank();
+            rank.initAsBlankRank();
+            board.add(rank);
         }
     }
 
@@ -98,9 +104,20 @@ public class Board {
 
     // 올바른 입력이 들어왔다고 가정 TODO: 입력 검증(at Input 클래스)
     public Piece findPiece(final String position) {
-        int index0 = position.charAt(0) - 'a';
-        int index1 = LENGTH - (position.charAt(1) - '1') - 1;
+        int[] index = verifyPosition(position);
+        return board.get(index[1]).findPiece(index[0]).orElse(null);
+    }
 
-        return board.get(index1).findPiece(index0).orElse(null);
+    public void move(String position, Piece piece) {
+        int[] index = verifyPosition(position);
+
+        Rank rank = board.get(index[1]);
+        rank.set(index[0], piece);
+
+        board.set(index[1], rank);
+    }
+
+    private int[] verifyPosition(String position) {
+        return new int[]{position.charAt(0) - 'a', LENGTH - (position.charAt(1) - '1') - 1};
     }
 }

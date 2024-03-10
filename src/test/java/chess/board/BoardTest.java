@@ -52,4 +52,17 @@ public class BoardTest {
         assertThat(Piece.createWhitePiece(PieceType.rook.name())).isEqualTo(board.findPiece("h1"));
         assertThat(Piece.createWhitePiece(PieceType.king.name())).isEqualTo(board.findPiece("e1"));
     }
+
+    @Test
+    @DisplayName("임의의 위치에 기물을 추가할 수 있어야 한다.")
+    public void move() throws Exception {
+        board.initializeEmpty();
+
+        final String position = "b5";
+        Piece piece = Piece.createBlackPiece(PieceType.rook.name());
+        board.move(position, piece);
+
+        assertThat(piece).isEqualTo(board.findPiece(position));
+        board.print();
+    }
 }
